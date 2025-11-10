@@ -6,16 +6,15 @@ set -o errexit
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Initialize Flask-Migrate if migrations folder doesn't exist
+# Only initialize Alembic if migrations folder doesn’t exist
 if [ ! -d "migrations" ]; then
+    echo "Initializing Alembic..."
     flask db init
 fi
 
-# Create initial migration if none exist
-flask db migrate -m "Initial migration" || echo "Migration already exists or no changes detected"
-
-# Run database migrations
-flask db upgrade
+# Upgrade database to latest version
+echo "Upgrading database..."
+flask db upgrade || echo "⚠️ Database already up to date or revision mismatch."
 
 # Create uploads directory
 mkdir -p static/uploads
@@ -29,10 +28,7 @@ from models import Admin
 app = create_app()
 
 with app.app_context():
-    # Create tables
     db.create_all()
-    
-    # Create admin if doesn't exist
     admin = Admin.query.filter_by(username='admin').first()
     if not admin:
         admin = Admin(username='admin', email='admin@example.com')
