@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Submitted</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 450px;
+    }
+    h1 {
+      color: #28a745;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #333;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+    .report-id {
+      background: #eefaf0;
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: #155724;
+      font-weight: 600;
+      display: inline-block;
+      margin: 10px 0;
+    }
+    .redirect {
+      color: #666;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+  <script>
+    // Redirect to home after 5 seconds
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 10000);
+  </script>
+</head>
+<body>
+    <a href="/" style="display:inline-block; margin-top:15px; color:#007bff; text-decoration:none;">Go to Homepage →</a>
+  <div class="card">
+    <h1>✅ Report Submitted Successfully!</h1>
+    <p>Thank you for taking action against corruption.</p>
+    <p>Your report ID:</p>
+    <div class="report-id">{{ report.report_id }}</div>
+    <p>Your report is currently under review. You will be contacted if follow-up is needed.</p>
+    <p class="redirect">Redirecting you to the homepage in 10 seconds...</p>
+  </div>
+</body>
+</html>

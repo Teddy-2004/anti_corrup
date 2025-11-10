@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Submit Report - Anti-Corruption Platform{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-file-alt me-2"></i>Submit Corruption Report</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Your identity is protected.</strong> This form is completely anonymous. No personal information will be collected.
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="mb-4">
+                            <label for="corruption_type" class="form-label">Type of Corruption <span class="text-danger">*</span></label>
+                            <select class="form-select" id="corruption_type" name="corruption_type" required>
+                                <option value="">Select corruption type...</option>
+                                <option value="Bribery">Bribery</option>
+                                <option value="Embezzlement">Embezzlement</option>
+                                <option value="Fraud">Fraud</option>
+                                <option value="Extortion">Extortion</option>
+                                <option value="Nepotism">Nepotism</option>
+                                <option value="Abuse of Power">Abuse of Power</option>
+                                <option value="Conflict of Interest">Conflict of Interest</option>
+                                <option value="Money Laundering">Money Laundering</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="description" name="description" rows="6" required 
+                                      placeholder="Please provide detailed information about the corruption case..."></textarea>
+                            <div class="form-text">Include: What happened? Who was involved? When did it occur?</div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="location" class="form-label">Location (Optional)</label>
+                            <input type="text" class="form-control" id="location" name="location" 
+                                   placeholder="City, State, or specific location">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="evidence" class="form-label">Upload Evidence (Optional)</label>
+                            <input type="file" class="form-control" id="evidence" name="evidence" multiple 
+                                   accept=".jpg,.jpeg,.png,.gif,.pdf">
+                            <div class="form-text">
+                                <i class="fas fa-paperclip me-1"></i>
+                                You can upload multiple files (images or PDFs). Max size: 16MB per file.
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Submit Report
+                            </button>
+                            <a href="{{ url_for('citizen.index') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-4 p-3 bg-light rounded">
+                <h6 class="mb-2"><i class="fas fa-shield-alt me-2"></i>Security & Privacy</h6>
+                <ul class="small mb-0">
+                    <li>No personal information is required or collected</li>
+                    <li>All submissions are encrypted and stored securely</li>
+                    <li>You will receive a unique Report ID to track your submission</li>
+                    <li>Evidence files are stored securely and only accessible to administrators</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

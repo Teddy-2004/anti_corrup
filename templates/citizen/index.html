@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section bg-primary text-white py-5">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold mb-4">Fight Corruption, Build Trust</h1>
+        <p class="lead mb-4">Report corruption cases anonymously and help create a transparent society</p>
+        <a href="{{ url_for('citizen.submit_report') }}" class="btn btn-light btn-lg px-5">
+            <i class="fas fa-file-alt me-2"></i>Submit a Report
+        </a>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fas fa-user-secret fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">100% Anonymous</h5>
+                    <p class="card-text">Your identity is protected. No personal information is collected or stored.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fas fa-lock fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">Secure & Encrypted</h5>
+                    <p class="card-text">All data is encrypted and stored securely. Your report is safe with us.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="feature-icon bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">Quick & Easy</h5>
+                    <p class="card-text">Submit a report in minutes. Upload evidence and track your report ID.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="mb-4">How It Works</h2>
+                <div class="d-flex mb-3">
+                    <div class="me-3">
+                        <span class="badge bg-primary rounded-circle" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem;">1</span>
+                    </div>
+                    <div>
+                        <h5>Fill the Report Form</h5>
+                        <p class="text-muted">Provide details about the corruption case you want to report.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-3">
+                    <div class="me-3">
+                        <span class="badge bg-primary rounded-circle" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem;">2</span>
+                    </div>
+                    <div>
+                        <h5>Upload Evidence (Optional)</h5>
+                        <p class="text-muted">Attach photos, documents, or any supporting evidence.</p>
+                    </div>
+                </div>
+                <div class="d-flex mb-3">
+                    <div class="me-3">
+                        <span class="badge bg-primary rounded-circle" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem;">3</span>
+                    </div>
+                    <div>
+                        <h5>Get Your Report ID</h5>
+                        <p class="text-muted">Receive a unique ID to track your report's status.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-clipboard-check text-primary" style="font-size: 15rem; opacity: 0.1;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <h2 class="mb-4">Types of Corruption You Can Report</h2>
+            <div class="row g-3 mt-4">
+                <div class="col-md-4">
+                    <span class="badge bg-danger p-3 w-100">Bribery</span>
+                </div>
+                <div class="col-md-4">
+                    <span class="badge bg-warning text-dark p-3 w-100">Embezzlement</span>
+                </div>
+                <div class="col-md-4">
+                    <span class="badge bg-info p-3 w-100">Fraud</span>
+                </div>
+                <div class="col-md-4">
+                    <span class="badge bg-success p-3 w-100">Extortion</span>
+                </div>
+                <div class="col-md-4">
+                    <span class="badge bg-secondary p-3 w-100">Nepotism</span>
+                </div>
+                <div class="col-md-4">
+                    <span class="badge bg-primary p-3 w-100">Others</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

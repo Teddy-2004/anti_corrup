@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Report - Anti-Corruption Platform{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-file-alt me-2"></i>Manage Your Report</h2>
+                <a href="{{ url_for('citizen.track_report') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Track Another Report
+                </a>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Report Status -->
+                    <div class="card mb-4">
+                        <div class="card-header 
+                            {% if report.status == 'Pending' %}bg-warning text-dark
+                            {% elif report.status == 'Reviewed' %}bg-info text-white
+                            {% else %}bg-success text-white{% endif %}">
+                            <h5 class="mb-0">
+                                <i class="fas fa-flag me-2"></i>Report Status: {{ report.status }}
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong>Report ID:</strong>
+                                    <p><span class="badge bg-secondary">{{ report.report_id }}</span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>Submitted On:</strong>
+                                    <p>{{ report.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <strong>Last Updated:</strong>
+                                    <p>{{ report.updated_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong>Can Edit:</strong>
+                                    <p>
+                                        {% if can_edit %}
+                                        <span class="badge bg-success">Yes</span>
+                                        {% else %}
+                                        <span class="badge bg-danger">No ({{ report.status }})</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {% if not can_edit %}
+                            <div class="alert alert-info mb-0">
+                                <i class="fas fa-lock me-2"></i>
+                                This report cannot be edited because it has been {{ report.status.lower() }} by administrators.
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Report Details Form -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Report Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="action" value="update">
+                                
+                                <div class="mb-3">
+                                    <label for="corruption_type" class="form-label">Type of Corruption</label>
+                                    <select class="form-select" id="corruption_type" name="corruption_type" 
+                                            {% if not can_edit %}disabled{% endif %} required>
+                                        <option value="Bribery" {% if report.corruption_type == 'Bribery' %}selected{% endif %}>Bribery</option>
+                                        <option value="Embezzlement" {% if report.corruption_type == 'Embezzlement' %}selected{% endif %}>Embezzlement</option>
+                                        <option value="Fraud" {% if report.corruption_type == 'Fraud' %}selected{% endif %}>Fraud</option>
+                                        <option value="Extortion" {% if report.corruption_type == 'Extortion' %}selected{% endif %}>Extortion</option>
+                                        <option value="Nepotism" {% if report.corruption_type == 'Nepotism' %}selected{% endif %}>Nepotism</option>
+                                        <option value="Abuse of Power" {% if report.corruption_type == 'Abuse of Power' %}selected{% endif %}>Abuse of Power</option>
+                                        <option value="Conflict of Interest" {% if report.corruption_type == 'Conflict of Interest' %}selected{% endif %}>Conflict of Interest</option>
+                                        <option value="Money Laundering" {% if report.corruption_type == 'Money Laundering' %}selected{% endif %}>Money Laundering</option>
+                                        <option value="Other" {% if report.corruption_type == 'Other' %}selected{% endif %}>Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="6" 
+                                              {% if not can_edit %}readonly{% endif %} required>{{ report.description }}</textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location (Optional)</label>
+                                    <input type="text" class="form-control" id="location" name="location" 
+                                           value="{{ report.location or '' }}"
+                                           {% if not can_edit %}readonly{% endif %}>
+                                </div>
+
+                                {% if can_edit %}
+                                <div class="mb-3">
+                                    <label for="evidence" class="form-label">Add More Evidence (Optional)</label>
+                                    <input type="file" class="form-control" id="evidence" name="evidence" multiple 
+                                           accept=".jpg,.jpeg,.png,.gif,.pdf">
+                                    <div class="form-text">
+                                        <i class="fas fa-paperclip me-1"></i>
+                                        You can upload additional files (images or PDFs). Max size: 16MB per file.
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-save me-2"></i>Update Report
+                                    </button>
+                                </div>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Timeline -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-history me-2"></i>Timeline</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="d-flex mb-3">
+                                    <div class="me-3">
+                                        <i class="fas fa-circle text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Submitted</strong>
+                                        <p class="text-muted small mb-0">{{ report.created_at.strftime('%b %d, %Y %I:%M %p') }}</p>
+                                    </div>
+                                </div>
+                                {% if report.updated_at != report.created_at %}
+                                <div class="d-flex mb-3">
+                                    <div class="me-3">
+                                        <i class="fas fa-circle text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Last Updated</strong>
+                                        <p class="text-muted small mb-0">{{ report.updated_at.strftime('%b %d, %Y %I:%M %p') }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% if report.status != 'Pending' %}
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <i class="fas fa-circle text-success"></i>
+                                    </div>
+                                    <div>
+                                        <strong>{{ report.status }}</strong>
+                                        <p class="text-muted small mb-0">By Admin</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Evidence Files -->
+                    {% if report.evidence %}
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0"><i class="fas fa-paperclip me-2"></i>Evidence ({{ report.evidence|length }})</h5>
+                        </div>
+                        <div class="card-body">
+                            {% for evidence in report.evidence %}
+                            <div class="d-flex justify-content-between align-items-center mb-3 p-2 border rounded">
+                                <div>
+                                    {% if evidence.file_type in ['jpg', 'jpeg', 'png', 'gif'] %}
+                                    <i class="fas fa-image text-primary me-2"></i>
+                                    {% else %}
+                                    <i class="fas fa-file-pdf text-danger me-2"></i>
+                                    {% endif %}
+                                    <small>{{ evidence.original_filename }}</small>
+                                </div>
+                                {% if can_edit %}
+                                <form method="POST" class="d-inline">
+                                    <input type="hidden" name="action" value="delete_evidence">
+                                    <input type="hidden" name="evidence_id" value="{{ evidence.id }}">
+                                    <button type="submit" class="btn btn-sm btn-danger" 
+                                            onclick="return confirm('Delete this evidence file?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

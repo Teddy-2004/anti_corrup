@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Track Report - Anti-Corruption Platform{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-search me-2"></i>Track Your Report</h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Enter your Report ID to check the status and manage your report.
+                    </div>
+
+                    <form method="POST">
+                        <div class="mb-4">
+                            <label for="report_id" class="form-label">Report ID <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control form-control-lg text-center" 
+                                   id="report_id" name="report_id" 
+                                   placeholder="ACR-20250119-XXXX"
+                                   required
+                                   style="font-family: monospace; letter-spacing: 2px;">
+                            <div class="form-text">
+                                <i class="fas fa-tag me-1"></i>
+                                Example: ACR-20250119-A1B2C3D4
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-search me-2"></i>Track Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-4 p-3 bg-light rounded">
+                <h6 class="mb-2"><i class="fas fa-lightbulb me-2"></i>What You Can Do</h6>
+                <ul class="small mb-0">
+                    <li>Check the current status of your report</li>
+                    <li>Update report details (if status is still Pending)</li>
+                    <li>Add more evidence files</li>
+                    <li>View submission history</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning mt-3">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <strong>Note:</strong> Once your report has been reviewed or resolved by administrators, you will no longer be able to edit it.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
