@@ -31,8 +31,8 @@ with app.app_context():
     db.create_all()
     admin = Admin.query.filter_by(username='admin').first()
     if not admin:
-        admin = Admin(username='admin', email='admin@example.com')
-        admin.set_password('ChangeThisPassword123!')
+        admin = Admin(username='admin@anticorrup', email='admin@example.com')
+        admin.set_password('Anticorrup@123')
         db.session.add(admin)
         db.session.commit()
         print("✅ Admin user created!")
