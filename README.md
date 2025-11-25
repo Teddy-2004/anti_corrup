@@ -1,173 +1,367 @@
-Anti-Corruption Reporting Platform
+**Anti-Corruption Reporting Platform - Complete Setup Guide**
 
-A secure, web-based platform for anonymous corruption reporting with a powerful admin dashboard for case management.
+A comprehensive web-based platform for anonymous corruption reporting with a secure admin dashboard for case management.
 
-Live Demo: Homepage
- | Admin Dashboard
+**Overview**
 
-Contact: t.godebo@alustudent.com
+The Anti-Corruption Reporting Platform enables citizens to report corruption cases anonymously and securely. It includes:
 
-Overview
+**Public Portal:** Anonymous report submission with evidence upload
 
-The platform allows citizens to report corruption anonymously, track their reports, and provides administrators with tools to manage cases efficiently.
+**Report Tracking:** Citizens can track their reports by unique ID
 
-Key Features:
+**Admin Dashboard:** Comprehensive tools for reviewing and managing reports
 
-Citizen Portal
+**Dark Mode:** Full light/dark theme support with localStorage persistence
 
-Anonymous report submission (no login required)
+**Responsive Design:** Works seamlessly on desktop, tablet, and mobile devices
 
-Multiple corruption categories
 
-Upload evidence (images/PDFs, up to 16MB)
+**Features**
 
-Unique report ID for tracking
+**Citizen Features**
 
-Edit/update reports while pending
+- Anonymous corruption reporting (no login required)
 
-Light/Dark mode with persistence
+- Multiple corruption type categories
 
-Fully responsive design
+- File upload for evidence (images and PDFs, up to 16MB)
 
-Admin Dashboard
+- Unique Report ID generation for tracking
 
-Secure login with hashed passwords
+- Track reports by Report ID
 
-Real-time statistics and report management
+- Edit/update reports (only if status is "Pending")
 
-Advanced filtering (status, type, date range)
+- Add/remove evidence files
 
-Pagination for large datasets
+- View report timeline
 
-Evidence viewing and CSV export
+- Light/Dark mode toggle
 
-Hidden from public navigation for security
+**Admin Features**
 
-Security
+- Secure admin login with password hashing
 
-Full anonymity (no personal data collected)
+- Dashboard with real-time statistics
 
-Passwords hashed with PBKDF2-SHA256
+- Advanced filtering (by status, type, date range)
 
-SQL injection protection via SQLAlchemy
+- Pagination for large datasets
 
-XSS protection with Jinja2 auto-escaping
+- Report status management workflow
 
-File validation and sanitization
+- Evidence viewing and downloading
 
-CSRF protection and secure sessions
+- CSV export functionality
 
-Technology Stack
+- Report deletion with confirmation
 
-Backend: Python 3.12, Flask, Flask-SQLAlchemy, PostgreSQL, Gunicorn
-Frontend: Jinja2 templates, Bootstrap 5, Font Awesome, Custom CSS + Vanilla JS
-Database: PostgreSQL (admins, reports, evidence)
-Deployment: Render Cloud (PostgreSQL + Web Service)
+- Hidden from public navigation (security)
 
-Quick Start
-Prerequisites
+**Security Features**
 
-Python 3.10+
+- Complete anonymity (no personal data collection)
 
-PostgreSQL 12+
+- Werkzeug password hashing (PBKDF2-SHA256)
 
-pip
+- SQL injection prevention (SQLAlchemy ORM)
 
-Git
+- XSS protection (Jinja2 auto-escaping)
 
-Installation
-# Clone the repository
-git clone https://github.com/Anti-Corruption/anti-corruption-platform.git
-cd anti-corruption-platform
+- File upload validation and sanitization
+
+- Secure session management
+
+- CSRF protection
+
+
+**System Requirements**
+
+**Minimum Requirements:**
+
+- Linux (Ubuntu 20.04+, Debian 11+)
+
+- macOS (10.14+)
+
+- Windows (WSL2 recommended)
+
+**Browser Support**
+
+- Chrome 120+
+
+- Firefox 121+
+
+- Safari 17+
+
+- Edge 120+
+
+-Mobile browsers (iOS Safari, Chrome Mobile)
+
+
+**Installation Guide**
+
+**Step 1:** **Install System Dependencies**
+
+**On Ubuntu/Debian:**
+
+**Update package manager**
+
+sudo apt update
+
+sudo apt upgrade -y
+
+# Install Python and pip
+sudo apt install python3 
+
+python3-pip 
+
+python3-venv -y
+
+# Install PostgreSQL
+sudo apt install postgresql 
+
+postgresql-contrib -y
+
+# Install Git (if not already installed)
+sudo apt install git -y
+
+On macOS:
+
+Install Homebrew (if not already installed)
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Python
+brew install python3
+
+# Install PostgreSQL
+brew install postgresql
+
+# Install Git (if not already installed)
+brew install git
+
+**On Windows (WSL2):**
+
+Install WSL2 first, then follow Ubuntu/Debian steps above
+
+Step 2: Start PostgreSQL Service
+
+**On Linux:**
+Start PostgreSQL
+
+sudo systemctl start postgresql
+
+# Enable auto-start on boot (optional)
+sudo systemctl enable postgresql
+
+# Verify it's running
+sudo systemctl status postgresql
+```
+
+You should see:
+● postgresql.service - PostgreSQL RDBMS
+     Loaded: loaded (...; enabled; preset: enabled)
+     Active: active (running)
+```
+**On macOS:**
+
+Start PostgreSQL
+
+brew services 
+
+start postgresql
+
+# Verify it's running
+
+brew services list
+
+Step 3: Create PostgreSQL Database
+
+Access PostgreSQL
+
+sudo -u postgres psql
+
+**Step 4:** **Clone the Project**
+
+bash# Create a projects directory (optional)
+
+mkdir ~/projects
+
+cd ~/projects
+
+# Clone the repository (or extract if you have a ZIP file)
+
+git clone https://github.com/Teddy-2004/anti-corrup.git
+
+cd anti-corrup
+
+**Step 5: Create Virtual Environment**
+
+bash# Navigate to project directory (if not already there)
+
+cd ~/projects/anti-corruption-platform
 
 # Create virtual environment
 python3 -m venv venv
-source venv/bin/activate  # Linux/macOS
-# venv\Scripts\activate    # Windows
 
-# Install dependencies
+**Activate virtual environment**
+
+**On Linux/macOS:**
+
+source venv/bin/activate
+
+**On Windows:**
+
+venv\Scripts\activate
+
+Verify activation (you should see (venv) at the start of your terminal line)
+
+**Step 6: Install Python Dependencies**
+
+bash# Make sure you're in the virtual environment
+
+**Install all required packages**
+
 pip install --upgrade pip
+
 pip install -r requirements.txt
 
-Database Setup
-# Start PostgreSQL
-sudo systemctl start postgresql  # Linux
-# Create database and user
-psql -U postgres
-CREATE DATABASE anticorruption_db;
-CREATE USER anticorruption_user WITH PASSWORD 'your_secure_password';
-GRANT ALL PRIVILEGES ON DATABASE anticorruption_db TO anticorruption_user;
-\q
+**Verify installation**
 
-Configuration
+pip list
 
-Update config.py:
+You should see all these packages:
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://anticorruption_user:your_secure_password@localhost/anticorruption_db'
+Flask
 
-Run Locally
-# Initialize database tables and admin user
+Flask-SQLAlchemy
+
+Flask-Migrate
+
+Flask-Login
+
+psycopg2-binary
+
+Werkzeug
+
+python-dotenv
+
+gunicorn
+
+**Step 7: Create Project Directories**
+
+bash# Create uploads directory for evidence files
+
+mkdir -p static/uploads
+
+mkdir -p static/css
+
+mkdir -p static/js
+
+**Verify they were created**
+ls -la static/
+
+Running Locally
+
+**Step 1: Initialize the Database**
+
+bash# Make sure virtual environment is activated
+
+source venv/bin/activate
+
+**Set Flask app**
+
+export FLASK_APP=app.py
+
+**Create database tables and admin user**
+
 python3 create_admin.py
+```
 
-# Start the application
+You should see:
+✅ Database tables created
+✅ Admin user created!
+```
+
+**Step 2: Start the Application**
+
+bash# Make sure virtual environment is activated
+
+source venv/bin/activate
+
+**Navigate to project directory**
+
+cd ~/projects/anti-corrup
+
+# Run the Flask app
 python3 app.py
+```
+
+You should see:
+🚀 Starting Anti-Corruption Platform on http://localhost:5000
+👤 Admin login: http://localhost:5000/admin/login
+📝 Default credentials - Username: admin | Password: ChangeThisPassword123!
+```
+
+**Step 3: Access the Application**
+
+Open your web browser and visit:
+
+Public Portal:
+
+Homepage: http://localhost:5000
+
+Submit Report: http://localhost:5000/report
+
+Track Report: http://localhost:5000/track
+
+About: http://localhost:5000/about
+
+Admin Panel:
+
+Login: http://localhost:5000/admin/login
+
+Dashboard: http://localhost:5000/admin/dashboard (after login)
+
+**Step 4: Test the Application**
+
+Test as a Citizen:
+
+Visit http://localhost:5000
+
+Test as Admin:
+
+Visit http://localhost:5000/admin/login
+Login with:
+
+Username: admin
+Password: ChangeThisPassword123!
 
 
-Access the app: http://localhost:5000
+Verify the dashboard shows your test report
 
-Deployment to Render
+Click the 👁️ icon to view report details
 
-Push project to GitHub
+Change status to "Reviewed" and save
 
-Create PostgreSQL service on Render
+Try the dark mode toggle (🌙 icon)
 
-Create Web Service (Python runtime, gunicorn app:app)
+Step 5: Stop the Application
 
-Add environment variables: DATABASE_URL, SECRET_KEY, FLASK_ENV=production
+bash# In the terminal running the app, press:
 
-Deploy and access live site
+Ctrl+C
 
-Usage Guide
-For Citizens
+**Deactivate virtual environment (optional)**
 
-Submit a report on the homepage
+deactivate
 
-Track reports using the unique Report ID
+License & Attribution
 
-Edit pending reports and manage evidence
+This project is provided as-is for educational and development purposes.
 
-For Admins
-
-Login to the admin dashboard (password-protected)
-
-View, filter, and manage reports
-
-Download evidence and export report data to CSV
-
-Change default password immediately after first login
-
-Security Best Practices
-
-Keep all passwords and SECRET_KEY in environment variables
-
-Validate uploaded files and enforce size/type restrictions
-
-Do not expose admin credentials publicly
-
-Use HTTPS in production
-
-Project Structure
-anti-corruption-platform/
-├── app.py
-├── config.py
-├── models.py
-├── create_admin.py
-├── requirements.txt
-├── routes/
-├── templates/
-├── static/
-└── venv/
-
-License
-
-MIT License © 2025 Tedla Tesfaye
+Last Updated: January 19, 2025
+Version: 1.0.0
+Status: ✅ Production Ready
+For questions or issues, refer to the troubleshooting section or check the code comments.RetryClaude can make mistakes. Please double-check responses.
