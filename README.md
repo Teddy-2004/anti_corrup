@@ -1,28 +1,13 @@
 Anti-Corruption Reporting Platform - Complete Setup Guide
 A comprehensive web-based platform for anonymous corruption reporting with a secure admin dashboard for case management.
-**Table of Contents:
-**
-Overview
-Features
-System Requirements
-Installation Guide
-Configuration
-Running Locally
-Deployment to Render
-Usage Guide
-Troubleshooting
-Project Structure
-Technology Stack
-
-
-Overview
+**Overview**
 The Anti-Corruption Reporting Platform enables citizens to report corruption cases anonymously and securely. It includes:
 
-Public Portal: Anonymous report submission with evidence upload
-Report Tracking: Citizens can track their reports by unique ID
-Admin Dashboard: Comprehensive tools for reviewing and managing reports
-Dark Mode: Full light/dark theme support with localStorage persistence
-Responsive Design: Works seamlessly on desktop, tablet, and mobile devices
+**Public Portal:** Anonymous report submission with evidence upload
+**Report Tracking:** Citizens can track their reports by unique ID
+**Admin Dashboard:** Comprehensive tools for reviewing and managing reports
+**Dark Mode:** Full light/dark theme support with localStorage persistence
+**Responsive Design:** Works seamlessly on desktop, tablet, and mobile devices
 
 
 Features
