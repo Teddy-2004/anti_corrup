@@ -1,7 +1,7 @@
 Anti-Corruption Reporting Platform - Complete Setup Guide
 A comprehensive web-based platform for anonymous corruption reporting with a secure admin dashboard for case management.
-Table of Contents:
-
+**Table of Contents:
+**
 Overview
 Features
 System Requirements
