@@ -336,6 +336,7 @@ Visit http://localhost:5000/admin/login
 Login with:
 
 Username: admin
+
 Password: ChangeThisPassword123!
 
 
@@ -361,7 +362,4 @@ License & Attribution
 
 This project is provided as-is for educational and development purposes.
 
-Last Updated: January 19, 2025
-Version: 1.0.0
-Status: ✅ Production Ready
-For questions or issues, refer to the troubleshooting section or check the code comments.RetryClaude can make mistakes. Please double-check responses.
+**Tedla Tesfaye Godebo**
