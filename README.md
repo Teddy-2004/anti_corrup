@@ -192,7 +192,7 @@ cd ~/projects
 
 # Clone the repository (or extract if you have a ZIP file)
 
-git clone https://github.com/Teddy-2004/anti-corrup.git
+git clone https://github.com/Teddy-2004/anti_corrup.git
 
 cd anti-corrup
 
